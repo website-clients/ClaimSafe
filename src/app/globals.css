@@ -3,7 +3,10 @@
 :root {
   --background: #f8fafc;
   --foreground: #020617;
-  --primary: #0f172a;
+  --primary: #0f2b52;
+  --primary-dark: #081226;
+  --primary-light: #1e4a78;
+  --primary-glow: #3f7cad;
   --primary-foreground: #ffffff;
   --secondary: #334155;
   --secondary-foreground: #ffffff;
@@ -16,13 +19,16 @@
   --border: #e2e8f0;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --ring: #0f172a;
+  --ring: #0f2b52;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-glow: var(--primary-glow);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -45,6 +51,22 @@ body {
   color: var(--foreground);
 }
 
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-entrance {
+  opacity: 0;
+  animation: fade-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -53,5 +75,11 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .animate-entrance {
+    opacity: 1;
+    animation: none;
+    transform: none;
   }
 }

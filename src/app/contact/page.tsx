@@ -54,11 +54,11 @@ export default function ContactPage() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-6">
+            <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-6 transition-all duration-200 hover:border-accent/30 hover:shadow-sm">
               <IconPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <p className="text-base text-secondary">{siteInfo.contactAddress}</p>
             </div>
-            <div className="min-h-80 flex-1 overflow-hidden rounded-2xl border border-border">
+            <div className="min-h-80 flex-1 overflow-hidden rounded-2xl border border-border transition-colors duration-200 hover:border-accent/30">
               <iframe
                 title="ClaimSafe location map"
                 src={mapSrc}

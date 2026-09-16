@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { navLinks, siteInfo } from "@/lib/nav";
+import { BrandWaves } from "./BrandWaves";
 import { IconClock, IconFacebook, IconInstagram, IconLinkedIn, IconMail, IconPin } from "./icons";
 
 const socialIcons = {
@@ -10,11 +12,15 @@ const socialIcons = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative overflow-hidden border-t border-primary-dark bg-primary text-primary-foreground">
+      <BrandWaves
+        variant="quiet"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-40"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-serif text-lg font-semibold">{siteInfo.name}</p>
-          <p className="mt-3 max-w-xs text-sm text-primary-foreground/70">
+          <Image src="/img/logo-white.png" alt="ClaimSafe" width={2172} height={724} className="h-8 w-auto" />
+          <p className="mt-4 max-w-xs text-sm text-primary-foreground/70">
             Your warranty partner, not just an administrator.
           </p>
           <div className="mt-5 flex gap-4">
@@ -24,8 +30,10 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary-foreground/10 transition-colors duration-200 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
+                  className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary-foreground/10 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
                 >
                   <Icon className="h-4.5 w-4.5" />
                 </a>
@@ -81,7 +89,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-primary-foreground/10 px-6 py-5 text-center text-xs text-primary-foreground/60">
+      <div className="relative border-t border-primary-foreground/10 px-6 py-5 text-center text-xs text-primary-foreground/60">
         © {new Date().getFullYear()} {siteInfo.name} All rights reserved.
       </div>
     </footer>

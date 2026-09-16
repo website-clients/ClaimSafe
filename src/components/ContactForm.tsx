@@ -30,7 +30,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center" role="status">
+      <div className="animate-entrance rounded-2xl border border-border bg-card p-8 text-center" role="status">
         <p className="font-serif text-xl font-semibold text-primary">Thank you.</p>
         <p className="mt-2 text-sm text-muted-foreground">
           Your request has been received. A member of our team will be in touch shortly.
@@ -40,7 +40,7 @@ export function ContactForm() {
   }
 
   const inputClass =
-    "w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+    "w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground transition-colors duration-200 focus:border-accent focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
@@ -81,7 +81,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full cursor-pointer rounded-full bg-accent px-6 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition-colors duration-200 hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full cursor-pointer rounded-full bg-accent px-6 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Request a Consultation"}
       </button>

@@ -1,24 +1,65 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navLinks } from "@/lib/nav";
 import { IconClose, IconMenu } from "./icons";
+
+const HIDE_THRESHOLD = 96;
 
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+  const openRef = useRef(open);
+
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    let ticking = false;
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const goingDown = y > lastScrollY.current;
+
+        setScrolled(y > 8);
+        setHidden(!openRef.current && goingDown && y > HIDE_THRESHOLD);
+
+        lastScrollY.current = y;
+        ticking = false;
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur transition-all duration-300 ease-out ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${scrolled ? "shadow-sm" : "shadow-none"}`}
+    >
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6 py-4">
-        <Link
-          href="/"
-          onClick={() => setOpen(false)}
-          className="font-serif text-lg font-semibold tracking-wide text-primary sm:text-xl"
-        >
-          Gestion ClaimSafe Inc.
+        <Link href="/" onClick={() => setOpen(false)} className="shrink-0" aria-label="ClaimSafe home">
+          <Image
+            src="/img/logo-color.png"
+            alt="ClaimSafe"
+            width={2172}
+            height={724}
+            priority
+            className="h-8 w-auto sm:h-9"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -58,7 +99,11 @@ export function Navbar() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Primary" className="border-t border-border bg-background md:hidden">
+        <nav
+          id="mobile-nav"
+          aria-label="Primary"
+          className="animate-entrance border-t border-border bg-background [animation-duration:280ms] md:hidden"
+        >
           <ul className="flex flex-col gap-1 px-6 py-4">
             {navLinks.map((link) => (
               <li key={link.href}>

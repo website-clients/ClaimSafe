@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 
@@ -42,27 +43,39 @@ export default function AboutPage() {
       <PageHero title="About Us" />
 
       <section className="border-b border-border bg-background py-20 sm:py-28">
-        <Container className="max-w-4xl">
-          <h2 className="font-serif text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
-            About ClaimSafe
-          </h2>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-secondary sm:text-lg">
-            <p>
-              Founded by Moe Naji, ClaimSafe provides a premium warranty-management service built exclusively
-              for Stellantis dealerships. We manage your entire warranty workflow claims.
-            </p>
-            <p>
-              Operating as an integrated part of your service department, ClaimSafe delivers audit-ready
-              documentation, first-time approvals, and a seamless process that improves profitability and
-              customer satisfaction.
-            </p>
+        <Container className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div>
+            <h2 className="font-serif text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
+              About ClaimSafe
+            </h2>
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-secondary sm:text-lg">
+              <p>
+                Founded by Moe Naji, ClaimSafe provides a premium warranty-management service built exclusively
+                for Stellantis dealerships. We manage your entire warranty workflow claims.
+              </p>
+              <p>
+                Operating as an integrated part of your service department, ClaimSafe delivers audit-ready
+                documentation, first-time approvals, and a seamless process that improves profitability and
+                customer satisfaction.
+              </p>
+            </div>
+            <div className="mt-8 rounded-2xl border border-border bg-card p-6 sm:p-8">
+              <p className="text-sm font-semibold uppercase tracking-wide text-accent">Our purpose is clear</p>
+              <p className="mt-2 font-serif text-2xl font-semibold text-primary sm:text-3xl">
+                Fast. Accurate. Profitable.
+              </p>
+              <p className="mt-1 text-base text-secondary">Your warranty program — elevated.</p>
+            </div>
           </div>
-          <div className="mt-8 rounded-2xl border border-border bg-card p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-wide text-accent">Our purpose is clear</p>
-            <p className="mt-2 font-serif text-2xl font-semibold text-primary sm:text-3xl">
-              Fast. Accurate. Profitable.
-            </p>
-            <p className="mt-1 text-base text-secondary">Your warranty program — elevated.</p>
+          <div className="overflow-hidden rounded-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1632733711679-529326f6db12?auto=format&fit=crop&crop=entropy&w=1200&h=1400&q=80"
+              alt="A technician inspecting a vehicle's fuse box during a warranty diagnostic"
+              width={1200}
+              height={1400}
+              className="h-auto w-full object-cover"
+              sizes="(min-width: 1024px) 480px, 100vw"
+            />
           </div>
         </Container>
       </section>
@@ -79,7 +92,10 @@ export default function AboutPage() {
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {reasons.map((reason) => (
-              <div key={reason.number} className="rounded-2xl border border-border bg-card p-7 shadow-sm">
+              <div
+                key={reason.number}
+                className="rounded-2xl border border-border bg-card p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/30 hover:shadow-md"
+              >
                 <p className="font-serif text-3xl font-semibold text-accent">{reason.number}</p>
                 <h3 className="mt-3 text-lg font-semibold text-primary">{reason.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{reason.description}</p>

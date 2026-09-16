@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { BrandWaves } from "@/components/BrandWaves";
 import { Container } from "@/components/Container";
 import { IconCheck } from "@/components/icons";
 
@@ -31,15 +33,25 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-border bg-primary text-primary-foreground">
-        <Container className="grid gap-10 py-24 sm:py-32">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-primary-foreground/60">
+      <section className="relative overflow-hidden bg-linear-to-br from-primary-dark via-primary to-primary text-primary-foreground">
+        <BrandWaves className="pointer-events-none absolute inset-0 h-full w-full" />
+        <Container className="relative grid gap-10 py-24 sm:py-32">
+          <p
+            className="animate-entrance text-sm font-semibold uppercase tracking-[0.25em] text-primary-foreground/60"
+            style={{ animationDelay: "0ms" }}
+          >
             Gestion ClaimSafe Inc.
           </p>
-          <h1 className="max-w-3xl font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
+          <h1
+            className="animate-entrance max-w-3xl font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-6xl"
+            style={{ animationDelay: "90ms" }}
+          >
             Streamlining Warranty Claims for Dealerships
           </h1>
-          <ul className="flex flex-col gap-3 text-base text-primary-foreground/85 sm:flex-row sm:gap-8 sm:text-lg">
+          <ul
+            className="animate-entrance flex flex-col gap-3 text-base text-primary-foreground/85 sm:flex-row sm:gap-8 sm:text-lg"
+            style={{ animationDelay: "180ms" }}
+          >
             <li className="flex items-center gap-2">
               <IconCheck className="h-5 w-5 shrink-0 text-accent" />
               Maximizes warranty revenue
@@ -53,10 +65,10 @@ export default function Home() {
               Trusted by dealerships across Canada
             </li>
           </ul>
-          <div>
+          <div className="animate-entrance" style={{ animationDelay: "270ms" }}>
             <Link
               href="/contact"
-              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition-colors duration-200 hover:bg-white hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-primary hover:shadow-lg active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
             >
               Book Now
             </Link>
@@ -73,7 +85,18 @@ export default function Home() {
           <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
             &ldquo;Your Warranty Partner, Not Just An Administrator.&rdquo;
           </h2>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-secondary sm:text-lg">
+          <div className="mt-8 overflow-hidden rounded-2xl">
+            <Image
+              src="/img/main-image.png"
+              alt="ClaimSafe's warranty operations — dealership service center, technicians, advisors, and claim documentation"
+              width={1536}
+              height={1024}
+              className="h-auto w-full object-cover"
+              sizes="(min-width: 1024px) 896px, 100vw"
+              priority
+            />
+          </div>
+          <div className="mt-8 space-y-5 text-base leading-relaxed text-secondary sm:text-lg">
             <p>
               Gestion ClaimSafe Inc. was founded with one clear mission: to help dealerships reclaim time,
               revenue, and peace of mind through expert warranty management. After years of working inside
@@ -97,7 +120,7 @@ export default function Home() {
               (item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2.5 rounded-xl border border-border bg-card p-4 text-sm font-medium text-card-foreground"
+                  className="flex items-start gap-2.5 rounded-xl border border-border bg-card p-4 text-sm font-medium text-card-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm"
                 >
                   <IconCheck className="mt-0.5 h-4.5 w-4.5 shrink-0 text-accent" />
                   {item}
@@ -119,7 +142,10 @@ export default function Home() {
           </h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {services.map((service) => (
-              <div key={service.title} className="rounded-2xl border border-border bg-card p-7 shadow-sm">
+              <div
+                key={service.title}
+                className="rounded-2xl border border-border bg-card p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/30 hover:shadow-md"
+              >
                 <h3 className="font-serif text-xl font-semibold text-primary">{service.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
               </div>
@@ -144,7 +170,7 @@ export default function Home() {
             {whyChoose.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-2.5 rounded-xl border border-border bg-card p-4 text-sm font-medium text-card-foreground"
+                className="flex items-start gap-2.5 rounded-xl border border-border bg-card p-4 text-sm font-medium text-card-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm"
               >
                 <IconCheck className="mt-0.5 h-4.5 w-4.5 shrink-0 text-accent" />
                 {item}
@@ -155,17 +181,62 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="bg-primary py-20 text-primary-foreground sm:py-24">
-        <Container className="flex flex-col items-center gap-6 text-center">
+      <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground sm:py-24">
+        <BrandWaves variant="quiet" className="pointer-events-none absolute inset-0 h-full w-full opacity-60" />
+        <Container className="relative flex flex-col items-center gap-6 text-center">
           <h2 className="max-w-2xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
             Ready to Improve Your Warranty Operations?
           </h2>
           <Link
             href="/contact"
-            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition-colors duration-200 hover:bg-white hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
+            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-primary hover:shadow-lg active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
           >
             Request Consultation
           </Link>
+        </Container>
+      </section>
+
+      {/* SafeAutoJobs */}
+      <section className="bg-muted py-14 sm:py-16">
+        <Container>
+          <div className="rounded-2xl border border-border bg-card p-8 sm:p-10">
+            <h2 className="font-serif text-2xl font-semibold text-primary sm:text-3xl">
+              Hiring in the Automotive Industry?
+            </h2>
+            <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-4">
+                <Image
+                  src="/img/safeautojobs-icon.png"
+                  alt="SafeAutoJobs"
+                  width={512}
+                  height={512}
+                  className="h-12 w-12 shrink-0 rounded-xl sm:h-14 sm:w-14"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold text-primary">Meet SafeAutoJobs</h3>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    SafeAutoJobs is a recruitment marketplace built specifically for the automotive industry,
+                    connecting automotive businesses with automotive professionals.
+                  </p>
+                  <p className="mt-3 text-xs font-medium text-muted-foreground sm:text-sm">
+                    Technicians • Service Advisors • Parts Professionals • Sales • Body Technicians • Detailers
+                    &amp; More
+                  </p>
+                </div>
+              </div>
+              <a
+                href="https://safeautojobs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-primary px-6 py-3 text-sm font-semibold text-primary transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground hover:shadow-md active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                VISIT SAFE AUTO JOBS →
+              </a>
+            </div>
+            <p className="mt-6 border-t border-border pt-4 text-xs text-muted-foreground">
+              A ClaimSafe Inc. company.
+            </p>
+          </div>
         </Container>
       </section>
     </>
